@@ -1,9 +1,9 @@
-const asyncHandler = require('express-async-handler');
-const StudentModel = require('../model/Student');
-const RegistrationModel = require('../model/Registration');
+const asyncHandler = require("express-async-handler");
+const StudentModel = require("../model/Student");
+const RegistrationModel = require("../model/Registration");
 
 const newRegistration = asyncHandler(async (req, res) => {
-  console.log('student registered');
+  console.log("student registered");
 
   const {
     name,
@@ -24,10 +24,10 @@ const newRegistration = asyncHandler(async (req, res) => {
     { seatNumber: 1, _id: 0 }
   );
 
-  seats = seats.map((i) => i['seatNumber']);
+  seats = seats.map((i) => i["seatNumber"]);
 
   if (seats.includes(seatNumber)) {
-    const err = new Error('Seat is not available.');
+    const err = new Error("Seat is not available.");
     err.status = 400;
     throw err;
   }
@@ -45,7 +45,7 @@ const newRegistration = asyncHandler(async (req, res) => {
     seatNumber,
     fees,
     duration,
-    studentID: student._id,
+    student: student._id,
   }).save();
 
   res.status(201).json({ registration, student });
@@ -56,6 +56,49 @@ const fetchStudents = asyncHandler(async (req, res) => {
   res.status(200).json({ students });
 });
 
+// Need Work
+const fetchExpires = asyncHandler(async (req, res) => {
+  let today = new Date();
+  let numberOfDaysToAdd = 6;
+  let end = today.setDate(today.getDate() + 6);
+  let start = today.setDate(today.getDate() - 6);
+
+  console.log(start);
+  console.log(end);
+
+  const expires = await RegistrationModel.find({
+    endDate: { $gte: today, $lt: end },
+  }).populate("student");
+
+  const expired = await RegistrationModel.find({
+    endDate: { $gte: start, $lt: today },
+  });
+
+  res.status(200).json({ expires, expired });
+});
+
+const fetchStudentByNumber = asyncHandler(async (req, res) => {
+  const mobileNumber = req.params.mobile;
+  let registration;
+  const student = await StudentModel.findOne({ mobileNumber }).sort({
+    $natural: -1,
+  });
+
+  if (student) {
+    registration = await RegistrationModel.findOne({
+      studentID: student.studentID,
+    }).sort({
+      $natural: -1,
+    });
+  } else {
+    throw new Error("No Student exist");
+  }
+  if (!student) throw new Error("No Student exist");
+  if (!registration) throw new Error("No Registration found");
+
+  res.status(200).json({ registration, student });
+});
+
 const fetchAvailableSeats = asyncHandler(async (req, res) => {
   const registrations = await RegistrationModel.find(
     {
@@ -64,13 +107,25 @@ const fetchAvailableSeats = asyncHandler(async (req, res) => {
     { seatNumber: 1, _id: 0 }
   );
 
-  const seats = [...Array(150).keys()];
+  const total = [...Array(151).keys()];
 
-  const filled = registrations.map((i) => i['seatNumber']);
+  // to remove 0th seat
+  total.shift();
 
-  const available = seats.filter((i) => !filled.includes(i) & (i !== 0));
+  const filled = registrations.map((i) => i["seatNumber"]);
 
-  res.status(200).send(available);
+  const seats = total.map((seat) => ({
+    seatNo: seat,
+    available: !filled.includes(seat),
+  }));
+
+  res.status(200).send(seats);
 });
 
-module.exports = { newRegistration, fetchStudents, fetchAvailableSeats };
+module.exports = {
+  newRegistration,
+  fetchStudents,
+  fetchAvailableSeats,
+  fetchStudentByNumber,
+  fetchExpires,
+};

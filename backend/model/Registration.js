@@ -1,10 +1,11 @@
-const { Schema, model } = require('mongoose');
-const { addMonths } = require('../Utils/dateUtil');
-const CounterModel = require('./Counter');
+const { default: mongoose } = require("mongoose");
+const { Schema, model } = require("mongoose");
+const { addMonths } = require("../Utils/dateUtil");
+const CounterModel = require("./Counter");
 
 const registrationSchema = new Schema({
   _id: { type: String, immutable: true, unique: true },
-  studentID: String,
+  student: { type: mongoose.Schema.Types.ObjectId, ref: "Student" },
   seatNumber: Number,
   startDate: { type: Date, default: Date.now },
   endDate: Date,
@@ -13,15 +14,15 @@ const registrationSchema = new Schema({
 });
 
 // for creating incremental id
-registrationSchema.pre('save', async function (next) {
+registrationSchema.pre("save", async function (next) {
   try {
     const counter = await CounterModel.findByIdAndUpdate(
-      { _id: 'RegistrationId' },
+      { _id: "RegistrationId" },
       { $inc: { seq: 1 } },
       { upsert: true }
     );
 
-    const registrationId = counter ? `RI-${counter.seq}` : 'RI-1';
+    const registrationId = counter ? `RI-${counter.seq}` : "RI-1";
     this._id = registrationId;
 
     const start = new Date(this.startDate.getTime());
@@ -31,4 +32,4 @@ registrationSchema.pre('save', async function (next) {
   }
 });
 
-module.exports = model('Registrations', registrationSchema);
+module.exports = model("Registrations", registrationSchema);

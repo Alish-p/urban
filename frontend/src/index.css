@@ -3,13 +3,13 @@ main {
 }
 .serviceBox {
   color: #02c504;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   text-align: center;
   padding: 0 0 30px 20px;
   position: relative;
 }
 .serviceBox:before {
-  content: '';
+  content: "";
   border: 3px dotted #02c504;
   border-top-style: solid;
   border-bottom-style: solid;
@@ -40,7 +40,7 @@ main {
 }
 .serviceBox .service-content:before,
 .serviceBox .service-content:after {
-  content: '';
+  content: "";
   background: #02c504;
   width: 10px;
   height: 10px;
@@ -71,4 +71,30 @@ main {
   .serviceBox {
     margin: 0 0 30px;
   }
+}
+
+.available {
+  color: #d3d3d3;
+}
+
+.not-available {
+  color: #393939;
+}
+
+.row-15 {
+  display: flex;
+}
+
+.upside {
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+}
+
+.passage {
+  flex: 2;
+}
+
+.home {
+  height: 90vh;
+  width: 90vw;
 }

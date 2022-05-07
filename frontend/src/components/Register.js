@@ -1,16 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { Form, Button, Col, Row } from 'react-bootstrap';
-import { Formik, Field } from 'formik';
-import { RegistrationSchema } from '../Utils/ValidationSchema';
-import { useNavigate, useParams } from 'react-router-dom';
-import TextField from '../Utils/FormComponents/TextField';
-import RadioField from '../Utils/FormComponents/RadioButton';
-import FormContainer from '../components/FormContainer';
-import { useEffect } from 'react';
-import { register, unset } from '../redux/slices/Student';
-import { Link } from 'react-router-dom';
-import Message from './Message';
-import Loader from './Loader';
+import { useDispatch, useSelector } from "react-redux";
+import { Form, Button, Col, Row } from "react-bootstrap";
+import { Formik, Field } from "formik";
+import { RegistrationSchema } from "../Utils/ValidationSchema";
+import { useNavigate, useParams } from "react-router-dom";
+import TextField from "../Utils/FormComponents/TextField";
+import RadioField from "../Utils/FormComponents/RadioButton";
+import FormContainer from "../components/FormContainer";
+import { useEffect } from "react";
+import { register, unset } from "../redux/slices/Student";
+import { Link } from "react-router-dom";
+import Message from "./Message";
+import Loader from "./Loader";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const Register = () => {
 
   useEffect(() => {
     if (registered) {
-      Navigate('/success');
+      Navigate("/success");
     }
     return () => {
       dispatch(unset());
@@ -31,15 +31,15 @@ const Register = () => {
   }, [registered]);
 
   const initialValues = {
-    name: '',
-    gender: '',
+    name: "",
+    gender: "",
     mobileNumber: 0,
-    fees: '',
-    city: '',
-    age: '',
-    exam: '',
-    seatNumber: '',
-    duration: '',
+    fees: "",
+    city: "",
+    age: "",
+    exam: "",
+    seatNumber: "",
+    duration: "",
   };
 
   const handleSubmit = (values, { setSubmitting }) => {
@@ -70,7 +70,6 @@ const Register = () => {
                 name="name"
                 component={TextField}
                 label="Name"
-                placeholder="Enter name"
               />
 
               <Field
@@ -79,8 +78,8 @@ const Register = () => {
                 label="Gender"
                 handleChange={handleChange}
                 options={[
-                  { label: 'Female', value: 'F' },
-                  { label: 'Male', value: 'M' },
+                  { label: "Female", value: "F" },
+                  { label: "Male", value: "M" },
                 ]}
               />
 
@@ -103,7 +102,7 @@ const Register = () => {
                 name="fees"
                 component={TextField}
                 label="Price"
-                placeholder="Enter Price"
+                onWheel={(e) => e.target.blur()}
               />
 
               <Field
@@ -111,15 +110,13 @@ const Register = () => {
                 name="seatNumber"
                 component={TextField}
                 label="Seat Number"
-                placeholder="Seat Number"
               />
 
               <Field
                 type="number"
                 name="duration"
                 component={TextField}
-                label="Duration"
-                placeholder="Duration"
+                label="Duration (Months)"
               />
 
               <Field

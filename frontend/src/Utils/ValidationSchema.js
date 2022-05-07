@@ -1,46 +1,53 @@
-import * as Yup from 'yup';
+import * as Yup from "yup";
 
 export const RegistrationSchema = Yup.object().shape({
   name: Yup.string()
-    .min(3, 'Name should have 3 to 50 characters')
-    .max(50, 'Name should have 3 to 50 characters')
-    .required('Name is Required'),
-  gender: Yup.string().required('Gender is Required'),
+    .min(3, "Name should have 3 to 50 characters")
+    .max(50, "Name should have 3 to 50 characters")
+    .required("Name is Required"),
+  gender: Yup.string().required("Gender is Required"),
   mobileNumber: Yup.string().matches(
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-    'Mobile Number should have 10 digits'
+    /^\d{10}$/,
+    "Mobile Number should have 10 digits"
   ),
   age: Yup.number()
-    .min(10, 'Please enter valid Age')
-    .max(100, 'Please enter Valid Age'),
+    .min(10, "Please enter valid Age")
+    .max(100, "Please enter Valid Age"),
 
   city: Yup.string()
-    .min(3, 'City should have 3 to 20 characters')
-    .max(20, 'City should have 3 to 20 characters'),
+    .min(3, "City should have 3 to 20 characters")
+    .max(20, "City should have 3 to 20 characters"),
 
   exam: Yup.string()
-    .min(2, 'Exam should have 2 to 20 characters')
-    .max(20, 'Exam should have 2 to 20 characters'),
+    .min(2, "Exam should have 2 to 20 characters")
+    .max(20, "Exam should have 2 to 20 characters"),
 
   fees: Yup.number()
-    .min(500, 'Please enter valid Fees')
-    .max(15000, 'Please enter Valid Fees'),
+    .min(500, "Please enter valid Fees")
+    .max(15000, "Please enter Valid Fees"),
 
   seatNumber: Yup.number()
-    .min(1, 'Please enter valid Seat Number')
-    .max(150, 'Please enter Valid Seat Number'),
+    .min(1, "Please enter valid Seat Number")
+    .max(150, "Please enter Valid Seat Number"),
 
   duration: Yup.number()
-    .min(1, 'Please enter valid Duration Months')
-    .max(12, 'Please enter Valid Duration Months'),
+    .min(1, "Please enter valid Duration Months")
+    .max(12, "Please enter Valid Duration Months"),
 });
 
 export const LoginSchema = Yup.object().shape({
   email: Yup.string()
-    .required('Email is Required')
-    .email('Please Provide valid Email Address'),
+    .required("Email is Required")
+    .email("Please Provide valid Email Address"),
   password: Yup.string()
-    .min(5, 'Password should have 5 to 10 characters')
-    .max(10, 'Password should have 5 to 10 characters')
-    .required('Password is Required'),
+    .min(5, "Password should have 5 to 10 characters")
+    .max(10, "Password should have 5 to 10 characters")
+    .required("Password is Required"),
+});
+
+export const SearchSchema = Yup.object().shape({
+  mobileNumber: Yup.string().matches(
+    /^\d{10}$/,
+    "Mobile Number should have 10 digits"
+  ),
 });

@@ -1,4 +1,4 @@
-import { Form } from 'react-bootstrap';
+import { Form } from "react-bootstrap";
 
 const TextField = ({ field, form, type, label, placeholder, size }) => {
   const meta = form.getFieldMeta(field.name);
@@ -11,6 +11,7 @@ const TextField = ({ field, form, type, label, placeholder, size }) => {
         placeholder={placeholder}
         {...field}
         isInvalid={meta.touched && meta.error}
+        onWheel={(e) => e.target.blur()}
       />
       <Form.Control.Feedback type="invalid">{meta.error}</Form.Control.Feedback>
     </Form.Group>

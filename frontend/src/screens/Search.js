@@ -1,64 +1,60 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { Formik, Field } from "formik";
-import { LoginSchema } from "../Utils/ValidationSchema";
+import { SearchSchema } from "../Utils/ValidationSchema";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../redux/slices/User";
-import Message from "./Message";
-import Loader from "./Loader";
+import { fetchStudent, unset } from "../redux/slices/Student";
+import Message from "../components/Message";
+import Loader from "../components/Loader";
 import TextField from "../Utils/FormComponents/TextField";
-import FormContainer from "./FormContainer";
+import FormContainer from "../components/FormContainer";
 import { useEffect } from "react";
 
-const LoginScreen = () => {
+const SearchScreen = () => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
 
-  const error = useSelector((state) => state.seat.error);
-  const loading = useSelector((state) => state.seat.loading);
-  const { _id } = useSelector((state) => state.seat.seats);
+  const error = useSelector((state) => state.student.error);
+  const loading = useSelector((state) => state.student.loading);
+  const studentExist = useSelector((state) => state.student.registered);
 
   useEffect(() => {
-    if (_id) {
-      Navigate(`/`);
+    if (studentExist) {
+      Navigate(`/success`);
     }
-  }, [_id]);
+    return () => {
+      dispatch(unset());
+    };
+  }, [studentExist]);
 
   const initialvalues = {
-    email: "",
-    password: "",
+    mobileNumber: "",
   };
 
   const handleSubmit = (values, { setSubmitting }) => {
-    dispatch(loginUser(values));
+    console.log(values);
+    dispatch(fetchStudent(values));
     setSubmitting(false);
   };
 
   return (
     <FormContainer>
-      <h2 className="my-3 text-center">User Login</h2>
+      <h2 className="my-3 text-center">Search Student</h2>
       {error && <Message variant="danger">{error}</Message>}
       {loading && <Loader size="sm" />}
       <Formik
         initialValues={initialvalues}
         onSubmit={handleSubmit}
-        validationSchema={LoginSchema}
+        validationSchema={SearchSchema}
       >
         {({ isSubmitting, handleSubmit }) => (
           <Form onSubmit={handleSubmit}>
             <Field
-              type="email"
-              name="email"
+              type="tel"
+              name="mobileNumber"
               component={TextField}
-              label="Email Address"
-              placeholder="Enter your Email Address"
-            />
-            <Field
-              type="password"
-              name="password"
-              component={TextField}
-              label="Password"
-              placeholder="Enter your password"
+              label="Mobile Number"
+              placeholder="Ex. 99887 45644"
             />
 
             <Button type="submit" disabled={isSubmitting}>
@@ -71,4 +67,4 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default SearchScreen;

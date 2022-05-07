@@ -1,8 +1,8 @@
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { logoutUser } from '../redux/slices/User';
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logoutUser } from "../redux/slices/User";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -12,6 +12,14 @@ const Header = () => {
 
   const handleLogut = () => {
     dispatch(logoutUser());
+  };
+
+  const handleSearch = () => {
+    Navigate("/search");
+  };
+
+  const handleExpire = () => {
+    Navigate("/expire");
   };
 
   return (
@@ -26,12 +34,35 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
               {_id && (
-                <LinkContainer to={'/register'}>
+                <LinkContainer to={"/register"}>
                   <Nav.Link>
-                    <i className="fas fa-shopping-cart" /> Register
+                    <i className="fa-solid fa-address-card" /> Register
                   </Nav.Link>
                 </LinkContainer>
               )}
+              {_id && (
+                <LinkContainer to={"/view-seats"}>
+                  <Nav.Link>
+                    <i className="fa-solid fa-couch" /> View Seats
+                  </Nav.Link>
+                </LinkContainer>
+              )}
+
+              {/* functionality dropdown */}
+              {_id && (
+                <>
+                  <NavDropdown title={"Options"} id="option-dropdown">
+                    <NavDropdown.Item onClick={handleSearch}>
+                      Search
+                    </NavDropdown.Item>
+                    <NavDropdown.Item onClick={handleExpire}>
+                      Expire
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </>
+              )}
+
+              {/* Logout dropdown */}
               {_id ? (
                 <>
                   <NavDropdown title={name} id="profile-dropdown">
@@ -41,7 +72,7 @@ const Header = () => {
                   </NavDropdown>
                 </>
               ) : (
-                <LinkContainer to={'/login'}>
+                <LinkContainer to={"/login"}>
                   <Nav.Link>
                     <i className="fas fa-user" /> Sign In
                   </Nav.Link>

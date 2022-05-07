@@ -1,13 +1,16 @@
-import { Container } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Container } from "react-bootstrap";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './components/Home';
-import Login from './components/Login';
-import Register from './components/Register';
-import Edit from './components/Edit';
-import Success from './components/Success';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Edit from "./components/Edit";
+import Success from "./components/Success";
+import ViewSeats from "./screens/ViewSeats";
+import Search from "./screens/Search";
+import ExpireScreen from "./screens/Expire";
 
 function App() {
   return (
@@ -22,7 +25,10 @@ function App() {
               <Route path="/login" element={<Login />}></Route>
               <Route path="/register" element={<Register />}></Route>
               <Route path="/success" element={<Success />}></Route>
+              <Route path="/view-seats" element={<ViewSeats />}></Route>
               <Route path="/edit" element={<Edit />}></Route>
+              <Route path="/search" element={<Search />}></Route>
+              <Route path="/expire" element={<ExpireScreen />}></Route>
             </Routes>
           </Container>
         </main>

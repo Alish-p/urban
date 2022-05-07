@@ -1,23 +1,28 @@
-import React from 'react';
-import './success.css';
-import moment from 'moment';
-import { useSelector } from 'react-redux';
-import { Button } from 'react-bootstrap';
-import Pdf from 'react-to-pdf';
-import { LinkContainer } from 'react-router-bootstrap';
-
-const ref = React.createRef();
+import React, { useRef } from "react";
+import "./success.css";
+import moment from "moment";
+import { useSelector } from "react-redux";
+import { LinkContainer } from "react-router-bootstrap";
+import { useReactToPrint } from "react-to-print";
 
 function Success() {
   const { registration, student } = useSelector(
     (state) => state.student.registration
   );
 
+  const componentRef = useRef();
+
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
   let { startDate, endDate, seatNumber, fees, _id: rId } = registration || {};
   let { name, mobileNumber, city } = student || {};
 
-  startDate = moment(startDate).format('DD-MM-YYYY');
-  endDate = moment(endDate).format('DD-MM-YYYY');
+  console.log({ startDate, endDate });
+  startDate = moment(startDate).zone(0).format("MMM D, YY");
+  endDate = moment(endDate).zone(0).format("MMM D, YY");
+  console.log({ startDate, endDate });
 
   return (
     <div>
@@ -27,167 +32,143 @@ function Success() {
 
           <div className="page-tools">
             <div className="action-buttons">
-              <Pdf
-                targetRef={ref}
-                scale={0.65}
-                x={10}
-                y={10}
-                filename="code-example.pdf"
+              <button
+                className="btn bg-white btn-light mx-1px text-95"
+                data-title="Download"
+                onClick={handlePrint}
               >
-                {({ toPdf }) => (
-                  <button
-                    className="btn bg-white btn-light mx-1px text-95"
-                    data-title="Download"
-                    onClick={toPdf}
-                  >
-                    <i className="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>{' '}
-                    Download
-                  </button>
-                )}
-              </Pdf>
+                <i className="mr-1 fa mr-2 fa-print text-primary-m1 text-120 w-2"></i>{" "}
+                Download
+              </button>
 
               <a
                 className="btn bg-white btn-light mx-1px text-95"
-                href="#"
+                href={`http://wa.me/91${mobileNumber}`}
                 data-title="PDF"
+                target={"_blank"}
               >
-                <i className="mr-1 fa fa-file-pdf-o text-danger-m1 text-120 w-2"></i>{' '}
-                Export
+                <i className="mr-1 fa-brands fa-whatsapp text-success text-120 w-2"></i>{" "}
+                Whatsapp
               </a>
             </div>
           </div>
         </div>
 
-        <div ref={ref} className="container px-0">
-          <div className="row mt-4">
-            <div className="col-12 col-lg-12">
-              <div className="row">
-                <div className="col-12">
-                  <div className="text-center text-150">
-                    <i className="fa fa-book fa-2x text-success-m2 mr-1"></i>
-                    <span className="text-default-d3"> Urban Read</span>
-                  </div>
-                </div>
+        <div class="my-5 print-source" ref={componentRef}>
+          <div class="row">
+            <div class="col d-flex justify-content-center">
+              UrbanRead Library
+            </div>
+          </div>
+          <div class="row my-5">
+            {/* <!-- To Section --> */}
+            <div class="col">
+              <div class="row text-primary my-3">To-</div>
+              <div class="row">{name}</div>
+              <div class="row">29-A Sukun Society</div>
+              <div class="row">Palanpur</div>
+              <div class="row">
+                <span class="p-0">
+                  <i class="fa-solid fa-phone text-secondary fs-6"></i> +91
+                  {mobileNumber}
+                </span>
               </div>
+            </div>
 
-              <hr className="row brc-default-l1 mx-n1 mb-4" />
-
-              <div className="row">
-                <div className="col-sm-6">
-                  <div>
-                    <span className="text-sm text-grey-m2 align-middle">
-                      To:
-                    </span>{' '}
-                    &nbsp;
-                    <span className="text-600 text-110 text-blue align-middle">
-                      {name}
-                    </span>
-                  </div>
-                  <div className="text-grey-m2">
-                    <div className="my-1">29- A Kanodar</div>
-                    <div className="my-1">{city}</div>
-                    <div className="my-1">
-                      <i className="fa fa-phone fa-flip-horizontal text-secondary"></i>
-                      <b className="text-600">+91 {mobileNumber}</b>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="text-95 col-sm-6 align-self-start d-sm-flex justify-content-end">
-                  <hr className="d-sm-none" />
-                  <div className="text-grey-m2">
-                    <div className="mt-1 mb-2 text-secondary-m1 text-600 text-125">
-                      Invoice
-                    </div>
-
-                    <div className="my-2">
-                      <i className="fa fa-circle text-blue-m2 text-xs mr-1"></i>
-                      &nbsp;
-                      <span className="text-600 text-90">ID:</span> #{rId}
-                    </div>
-
-                    <div className="my-2">
-                      <i className="fa fa-circle text-blue-m2 text-xs mr-1"></i>
-                      &nbsp;
-                      <span className="text-600 text-90">Issue Date:</span>{' '}
-                      {startDate}
-                    </div>
-
-                    <div className="my-2">
-                      <i className="fa fa-circle text-blue-m2 text-xs mr-1"></i>
-                      &nbsp;
-                      <span className="text-600 text-90">Status:</span>
-                      Paid{' '}
-                      <i
-                        className="fa fa-check logo-green"
-                        aria-hidden="true"
-                      ></i>
-                    </div>
-                  </div>
-                </div>
+            {/* <!-- Invoice Section --> */}
+            <div class="col">
+              <div class="row text-primary my-3">Invoice</div>
+              <div class="row  d-inline-block">
+                ID: <span className="text-muted">#{rId}</span>
               </div>
-
-              <div className="mt-4">
-                <div className="row text-600 text-white bgc-default-tp1 py-25">
-                  <div className="d-none d-sm-block col-1"> #</div>
-                  <div className="col-9 col-sm-5">Name</div>
-                  <div className="d-none d-sm-block col-4 col-sm-2">
-                    Seat No.
-                  </div>
-                  <div className="d-none d-sm-block col-sm-2">Start Date</div>
-                  <div className="col-2">End Date</div>
-                </div>
-
-                <div className="text-95 text-secondary-d3">
-                  <div className="row mb-2 mb-sm-0 py-25">
-                    <div className="d-none d-sm-block col-1"> 1</div>
-                    <div className="col-9 col-sm-5">{name}</div>
-                    <div className="d-none d-sm-block col-2">{seatNumber}</div>
-                    <div className="d-none d-sm-block col-2 text-95">
-                      {startDate}
-                    </div>
-                    <div className="col-2 text-secondary-d2">{endDate}</div>
-                  </div>
-
-                  <hr />
-
-                  <div className="row border-b-2 brc-default-l2"></div>
-
-                  <div className="row mt-3">
-                    <div className="col-12 col-sm-7 text-grey-d2 text-95 text-secondary-d1 mt-2 mt-lg-0">
-                      &nbsp; Kindly Note, All amounts paid hereunder shall be
-                      nonrefundable once paid. ...
-                    </div>
-
-                    <div className="col-12 col-sm-5 text-grey text-90 order-first order-sm-last">
-                      <div className="row  align-items-center bgc-primary-l3 ">
-                        <div className="col-4"></div>
-                        <div className="col-4 text-right">Total Amount</div>
-                        <div className="col-4">
-                          <span className="text-120 text-success-d3 opacity-2">
-                            {' '}
-                            ₹ {fees}{' '}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="text-center mb-n1">
-                    <span className="text-secondary-d1 text-60  ">
-                      UrbanRead 3rd Floor new Bus-stand,Palanpur Mo: 7575049646{' '}
-                    </span>
-                  </div>
-
-                  <hr />
-                </div>
+              <br />
+              <div class="row d-inline">
+                Issue Date: <span className="text-muted">{startDate}</span>
               </div>
+              <br />
+              <div class="row d-inline">
+                <span class="p-0">
+                  Status : &nbsp; <span className="text-muted">Paid</span>{" "}
+                  <i class="fa-solid fa-check text-success"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* <!-- Table --> */}
+          <div class="row">
+            <table class="table align-middle mb-5 bg-light borderless">
+              <thead class="thead">
+                <tr className="table-head">
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Seat</th>
+                  <th>Start</th>
+                  <th>End</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <p class="text-muted mb-0">1</p>
+                  </td>
+                  <td>
+                    <p class="fw-bold mb-1">{name}</p>
+                    {/* <p class="text-muted mb-0"></p> */}
+                  </td>
+                  <td>
+                    <p class="text-muted mb-0">{seatNumber}</p>
+                  </td>
+                  <td>
+                    <p class="text-muted mb-0">{startDate}</p>
+                  </td>
+                  <td>
+                    <p class="text-muted mb-0">{endDate}</p>
+                  </td>
+                </tr>
+                <tr class="second-last-row">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+
+                <tr class="last-row">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td className="highlighted-cell">Total Amount</td>
+                  <td>₹ {fees} </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* <!-- TNC --> */}
+          <div class="row">
+            <h6 class="fs-6">Term and Conditions :</h6>
+            <p class="text-muted small">
+              All amount paid is non-refundable and seat allocated is
+              non-transferable.
+            </p>
+          </div>
+
+          <hr />
+
+          {/* <!-- Footer --> */}
+          <div class="row justify-content-center">
+            <div class="col">
+              <p class="small text-muted text-center">
+                +91 75750 49646 | 3RD Floor New Bus Stand, Palanpur |
+                urbanread.gmail.com
+              </p>
             </div>
           </div>
         </div>
 
         <div>
-          <LinkContainer to={'/'}>
+          <LinkContainer to={"/"}>
             <button className="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">
               Home
             </button>
