@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Container, Row, Table } from "react-bootstrap";
+import { Container, Row, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { fetchExpires } from "../redux/slices/Registrations";
 import { useEffect } from "react";
@@ -7,7 +7,6 @@ import moment from "moment";
 
 const ExpireScreen = () => {
   const dispatch = useDispatch();
-  const Navigate = useNavigate();
 
   //   const error = useSelector((state) => state.registration.error);
   //   const loading = useSelector((state) => state.registration.loading);
