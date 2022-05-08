@@ -23,7 +23,7 @@ const ExpireScreen = () => {
       <Row>
         <h1 className="p-0 my-5">Expires in a Week</h1>
 
-        <Table striped borderless hover variant="light" size="sm">
+        <Table striped borderless hover variant="light" size="sm" responsive>
           <thead className="thead-dark">
             <tr>
               <th>#</th>

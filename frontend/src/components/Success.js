@@ -25,7 +25,7 @@ function Success() {
   console.log({ startDate, endDate });
 
   return (
-    <div>
+    <div className="container">
       <div className="page-content container">
         <div className="page-header text-blue-d2">
           <h2 className="page-title text-secondary-d1">Invoice</h2>
@@ -96,7 +96,7 @@ function Success() {
           </div>
 
           {/* <!-- Table --> */}
-          <div class="row">
+          <div class="row table-responsive">
             <table class="table align-middle mb-5 bg-light borderless">
               <thead class="thead">
                 <tr className="table-head">
