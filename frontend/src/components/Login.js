@@ -14,9 +14,9 @@ const LoginScreen = () => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
 
-  const error = useSelector((state) => state.seat.error);
-  const loading = useSelector((state) => state.seat.loading);
-  const { _id } = useSelector((state) => state.seat.seats);
+  const error = useSelector((state) => state.user.error);
+  const loading = useSelector((state) => state.user.loading);
+  const { _id } = useSelector((state) => state.user.userInfo);
 
   useEffect(() => {
     if (_id) {
