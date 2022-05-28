@@ -17,6 +17,9 @@ const ExpireScreen = () => {
     dispatch(fetchExpires());
   }, []);
 
+  const createText = (name, expireDate) =>
+    `Hi+${name}%2C%0D%0AThank+you+for+being+a+part+of+our+UrbanRead+community.%0D%0AWe+hope+you%E2%80%99ve+been+able+to+enjoy+all+the+benefits+of+your+membership.%0D%0A%0D%0AYour+membership+is+expiring+on+${expireDate}.%0D%0APlease+renew+your+membership+to+continue+using+the+benefits.%0D%0AWe%E2%80%99re+excited+to+have+you+back%21%0D%0A%0D%0ABest%2C%0D%0AUrbanRead%0D%0A`;
+
   return (
     <Container>
       <Row>
@@ -35,34 +38,37 @@ const ExpireScreen = () => {
             </tr>
           </thead>
           <tbody>
-            {expires.map((registration, i) => (
-              <>
-                <tr>
+            {expires.map((registration, i) => {
+              let { _id, seatNumber, endDate } = registration || {};
+              const { name, mobileNumber } = registration.student || {};
+
+              endDate = moment(endDate).zone(0).format("MMM D, YY");
+
+              return (
+                <tr key={_id}>
                   <td>{i}</td>
-                  <td>{registration._id}</td>
-                  <td>{registration.student.name}</td>
-                  <td>{registration.student.mobileNumber}</td>
-                  <td>
-                    {moment(registration.endDate).zone(0).format("MMM D, YYYY")}
-                  </td>
-                  <td>{registration.seatNumber}</td>
+                  <td>{_id}</td>
+                  <td>{name}</td>
+                  <td>{mobileNumber}</td>
+                  <td>{endDate}</td>
+                  <td>{seatNumber}</td>
                   <td>
                     <a
-                      href={`http://wa.me/91${
-                        registration.student.mobileNumber
-                      }?text=Hi%20,Please%20Note%20that%20your%20membership%20expires%20on%20${moment(
-                        registration.endDate
-                      ).format("MMMM d, YY")}`}
+                      href={`http://wa.me/91${mobileNumber}?text=${createText(
+                        name,
+                        endDate
+                      )}`}
                       type="button"
-                      class="btn btn-outline-primary btn-sm p-0 px-3"
+                      className="btn btn-outline-primary btn-sm p-0 px-3"
                       target={"_blank"}
+                      rel="noreferrer"
                     >
                       Notify
                     </a>
                   </td>
                 </tr>
-              </>
-            ))}
+              );
+            })}
           </tbody>
         </Table>
       </Row>

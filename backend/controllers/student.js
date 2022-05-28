@@ -105,21 +105,38 @@ const fetchAvailableSeats = asyncHandler(async (req, res) => {
       endDate: { $gte: new Date() },
     },
     { seatNumber: 1, _id: 0 }
-  );
+  ).populate("student", "gender");
+
+  console.log(registrations);
 
   const total = [...Array(151).keys()];
 
   // to remove 0th seat
   total.shift();
 
-  const filled = registrations.map((i) => i["seatNumber"]);
-
-  const seats = total.map((seat) => ({
-    seatNo: seat,
-    available: !filled.includes(seat),
+  const filled = registrations.map((i) => ({
+    seatNo: i.seatNumber,
+    gender: i.student.gender,
+    available: false,
   }));
 
-  res.status(200).send(seats);
+  const filledarr = registrations.map((i) => i["seatNumber"]);
+  console.log(filledarr);
+
+  console.log(filled);
+
+  for (let i = 1; i <= 150; i++) {
+    if (!filledarr.includes(i)) {
+      filled.push({ seatNo: i, available: true });
+    }
+  }
+
+  console.log("xxx");
+  console.log(filled);
+
+  filled.sort((a, b) => a.seatNo - b.seatNo);
+
+  res.status(200).send(filled);
 });
 
 module.exports = {

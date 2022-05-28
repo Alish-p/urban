@@ -4,6 +4,10 @@ const addMonths = (date, months) => {
   if (date.getDate() != d) {
     date.setDate(0);
   }
+
+  // 25th may ends on 24th june
+  date.setDate(date.getDate() - 1);
+
   return date;
 };
 

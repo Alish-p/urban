@@ -15,8 +15,8 @@ export const RegistrationSchema = Yup.object().shape({
     .max(100, "Please enter Valid Age"),
 
   city: Yup.string()
-    .min(3, "City should have 3 to 20 characters")
-    .max(20, "City should have 3 to 20 characters"),
+    .min(3, "Address should have 3 to 20 characters")
+    .max(50, "Address should have 3 to 50 characters"),
 
   exam: Yup.string()
     .min(2, "Exam should have 2 to 20 characters")

@@ -81,6 +81,10 @@ main {
   color: #393939;
 }
 
+.female-seats {
+  color: plum !important;
+}
+
 .row-15 {
   display: flex;
 }

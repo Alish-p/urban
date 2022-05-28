@@ -65,10 +65,15 @@ const ViewSeats = () => {
 
       {/* First Row 1-13 */}
       <div className="row-15 my-5">
-        {firstRow.map(({ seatNo, available }) => {
+        {firstRow.map(({ seatNo, available, gender }) => {
           if (seatNo !== 0) {
             return (
-              <Seat key={seatNo} available={available} upside number={seatNo} />
+              <Seat
+                key={seatNo}
+                available={available}
+                gender={gender}
+                number={seatNo}
+              />
             );
           } else {
             return <div key={seatNo} className="passage"></div>;
@@ -78,10 +83,15 @@ const ViewSeats = () => {
 
       {/* Second Row 14-26 */}
       <div className="row-15 ">
-        {secondRow.map(({ seatNo, available }) => {
+        {secondRow.map(({ seatNo, available, gender }) => {
           if (seatNo !== 0) {
             return (
-              <Seat key={seatNo} available={available} upside number={seatNo} />
+              <Seat
+                key={seatNo}
+                available={available}
+                gender={gender}
+                number={seatNo}
+              />
             );
           } else {
             return <div key={seatNo} className="passage"></div>;
@@ -91,10 +101,15 @@ const ViewSeats = () => {
 
       {/* Third Row 14-26 */}
       <div className="row-15 mb-5">
-        {thirdRow.map(({ seatNo, available }) => {
+        {thirdRow.map(({ seatNo, available, gender }) => {
           if (seatNo !== 0) {
             return (
-              <Seat key={seatNo} available={available} upside number={seatNo} />
+              <Seat
+                key={seatNo}
+                available={available}
+                gender={gender}
+                number={seatNo}
+              />
             );
           } else {
             return <div key={seatNo} className="passage"></div>;
@@ -104,10 +119,15 @@ const ViewSeats = () => {
 
       {/* Fourth Row 14-26 */}
       <div className="row-15 ">
-        {fourthRow.map(({ seatNo, available }) => {
+        {fourthRow.map(({ seatNo, available, gender }) => {
           if (seatNo !== 0) {
             return (
-              <Seat key={seatNo} available={available} upside number={seatNo} />
+              <Seat
+                key={seatNo}
+                available={available}
+                gender={gender}
+                number={seatNo}
+              />
             );
           } else {
             return <div key={seatNo} className="passage"></div>;
@@ -117,10 +137,15 @@ const ViewSeats = () => {
 
       {/* Fifth Row 14-26 */}
       <div className="row-15 mb-5">
-        {fifthRow.map(({ seatNo, available }) => {
+        {fifthRow.map(({ seatNo, available, gender }) => {
           if (seatNo !== 0) {
             return (
-              <Seat key={seatNo} available={available} upside number={seatNo} />
+              <Seat
+                key={seatNo}
+                available={available}
+                gender={gender}
+                number={seatNo}
+              />
             );
           } else {
             return <div key={seatNo} className="passage"></div>;
@@ -129,10 +154,15 @@ const ViewSeats = () => {
       </div>
       {/* Sixth Row 14-26 */}
       <div className="row-15 ">
-        {sixthRow.map(({ seatNo, available }) => {
+        {sixthRow.map(({ seatNo, available, gender }) => {
           if (seatNo !== 0) {
             return (
-              <Seat key={seatNo} available={available} upside number={seatNo} />
+              <Seat
+                key={seatNo}
+                available={available}
+                gender={gender}
+                number={seatNo}
+              />
             );
           } else {
             return <div key={seatNo} className="passage"></div>;
@@ -142,10 +172,15 @@ const ViewSeats = () => {
 
       {/* Seventh Row 14-26 */}
       <div className="row-15 mb-5">
-        {seventhRow.map(({ seatNo, available }) => {
+        {seventhRow.map(({ seatNo, available, gender }) => {
           if (seatNo !== 0) {
             return (
-              <Seat key={seatNo} available={available} upside number={seatNo} />
+              <Seat
+                key={seatNo}
+                available={available}
+                gender={gender}
+                number={seatNo}
+              />
             );
           } else {
             return <div key={seatNo} className="passage"></div>;
@@ -154,10 +189,15 @@ const ViewSeats = () => {
       </div>
       {/* eighth Row 14-26 */}
       <div className="row-15 ">
-        {eigthRow.map(({ seatNo, available }) => {
+        {eigthRow.map(({ seatNo, available, gender }) => {
           if (seatNo !== 0) {
             return (
-              <Seat key={seatNo} available={available} upside number={seatNo} />
+              <Seat
+                key={seatNo}
+                available={available}
+                gender={gender}
+                number={seatNo}
+              />
             );
           } else {
             return <div key={seatNo} className="passage"></div>;
@@ -167,10 +207,15 @@ const ViewSeats = () => {
 
       {/* Nineth Row 14-26 */}
       <div className="row-15 mb-5">
-        {ninthRow.map(({ seatNo, available }) => {
+        {ninthRow.map(({ seatNo, available, gender }) => {
           if (seatNo !== 0) {
             return (
-              <Seat key={seatNo} available={available} upside number={seatNo} />
+              <Seat
+                key={seatNo}
+                available={available}
+                gender={gender}
+                number={seatNo}
+              />
             );
           } else {
             return <div key={seatNo} className="passage"></div>;
@@ -179,10 +224,15 @@ const ViewSeats = () => {
       </div>
       {/* 10th Row 14-26 */}
       <div className="row-15 ">
-        {tenthRow.map(({ seatNo, available }) => {
+        {tenthRow.map(({ seatNo, available, gender }) => {
           if (seatNo !== 0) {
             return (
-              <Seat key={seatNo} available={available} upside number={seatNo} />
+              <Seat
+                key={seatNo}
+                available={available}
+                gender={gender}
+                number={seatNo}
+              />
             );
           } else {
             return <div key={seatNo} className="passage"></div>;

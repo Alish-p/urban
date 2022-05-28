@@ -1,10 +1,11 @@
 import React from "react";
 import { Col, OverlayTrigger, Tooltip } from "react-bootstrap";
 
-const Seat = ({ available, number, upside }) => {
+const Seat = ({ available, number, gender }) => {
   let classes = "fa-solid fa-couch ";
   classes += available ? "available " : "not-available ";
-  classes += upside ? "upside" : "";
+
+  classes += gender == "F" ? "female-seats " : "";
 
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>

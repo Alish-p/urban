@@ -123,7 +123,7 @@ const Register = () => {
                 type="text"
                 name="city"
                 component={TextField}
-                label="City"
+                label="Address"
               />
 
               <Field

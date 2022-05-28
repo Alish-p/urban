@@ -23,7 +23,6 @@ export const fetchStudent = createAsyncThunk(
   "student/fetched",
   async ({ mobileNumber }, x) => {
     try {
-      console.log(mobileNumber);
       const { user } = x.getState();
 
       const { data } = await axios.get(`/api/students/${mobileNumber}`, {
