@@ -18,6 +18,10 @@ const Header = () => {
     Navigate("/search");
   };
 
+  const handleViewStudents = () => {
+    Navigate("/all-students");
+  };
+
   const handleExpire = () => {
     Navigate("/expire");
   };
@@ -52,6 +56,9 @@ const Header = () => {
               {_id && (
                 <>
                   <NavDropdown title={"Options"} id="option-dropdown">
+                    <NavDropdown.Item onClick={handleViewStudents}>
+                      View Students
+                    </NavDropdown.Item>
                     <NavDropdown.Item onClick={handleSearch}>
                       Search
                     </NavDropdown.Item>

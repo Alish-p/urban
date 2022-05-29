@@ -56,7 +56,6 @@ const Register = () => {
       <FormContainer>
         <h2 className="my-3 text-center"> New Registration</h2>
 
-        {error && <Message variant="danger">{error}</Message>}
         {loading && <Loader size="sm" />}
         <Formik
           onSubmit={handleSubmit}
@@ -132,6 +131,8 @@ const Register = () => {
                 component={TextField}
                 label="Exam"
               />
+
+              {error && <Message variant="danger">{error}</Message>}
 
               <Button
                 type="submit"

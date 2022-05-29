@@ -11,6 +11,7 @@ import Success from "./components/Success";
 import ViewSeats from "./screens/ViewSeats";
 import Search from "./screens/Search";
 import ExpireScreen from "./screens/Expire";
+import StudentsList from "./screens/StudentsList";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path="/edit" element={<Edit />}></Route>
               <Route path="/search" element={<Search />}></Route>
               <Route path="/expire" element={<ExpireScreen />}></Route>
+              <Route path="/all-students" element={<StudentsList />}></Route>
             </Routes>
           </Container>
         </main>

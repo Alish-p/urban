@@ -36,11 +36,29 @@ export const fetchStudent = createAsyncThunk(
   }
 );
 
+export const fetchAllStudents = createAsyncThunk(
+  "students/fetched",
+  async (y, x) => {
+    try {
+      const { user } = x.getState();
+
+      const { data } = await axios.get(`/api/students/`, {
+        headers: { Authorization: `Bearer ${user.userInfo.token}` },
+      });
+
+      return data;
+    } catch (error) {
+      throw x.rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   loading: false,
   registration: {},
   error: "",
   registered: false,
+  students: [],
 };
 
 export const student = createSlice({
@@ -51,6 +69,7 @@ export const student = createSlice({
       state.error = "";
       state.loading = false;
       state.registered = false;
+      state.students = [];
     },
   },
   extraReducers: {
@@ -85,6 +104,20 @@ export const student = createSlice({
       state.loading = false;
       state.registration = {};
       state.registered = false;
+    },
+    [fetchAllStudents.pending]: (state) => {
+      state.loading = true;
+      state.students = [];
+    },
+    [fetchAllStudents.fulfilled]: (state, action) => {
+      state.students = action.payload;
+      state.error = "";
+      state.loading = false;
+    },
+    [fetchAllStudents.rejected]: (state, { payload }) => {
+      state.error = payload.message;
+      state.loading = false;
+      state.students = [];
     },
   },
 });

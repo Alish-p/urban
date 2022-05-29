@@ -52,8 +52,18 @@ const newRegistration = asyncHandler(async (req, res) => {
 });
 
 const fetchStudents = asyncHandler(async (req, res) => {
-  const students = await StudentModel.find();
-  res.status(200).json({ students });
+  const registrations = await RegistrationModel.find(
+    {
+      endDate: { $gte: new Date() },
+    },
+    { _id: 0, seatNumber: 1, startDate: 1, endDate: 1 }
+  ).populate("student", "name gender mobileNumber");
+
+  console.log(registrations);
+
+  registrations.sort((a, b) => a.seatNumber - b.seatNumber);
+
+  res.status(200).json(registrations);
 });
 
 // Need Work

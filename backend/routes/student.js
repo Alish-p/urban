@@ -10,7 +10,7 @@ const {
 const { private } = require("../middlewares/Auth");
 
 router.post("/", private, newRegistration);
-router.get("/", private, fetchStudents);
+router.get("/", fetchStudents);
 router.get("/seats", private, fetchAvailableSeats);
 router.get("/expires", private, fetchExpires);
 router.get("/:mobile", private, fetchStudentByNumber);
