@@ -69,6 +69,28 @@ const Header = () => {
                 </>
               )}
 
+              {/* functionality dropdown */}
+              {_id && (
+                <>
+                  <NavDropdown title={"Pre-book"} id="option-dropdown">
+                    <NavDropdown.Item
+                      onClick={() => {
+                        Navigate("/waiting-form");
+                      }}
+                    >
+                      Create
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      onClick={() => {
+                        Navigate("/waiting-list");
+                      }}
+                    >
+                      View-Bookings
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </>
+              )}
+
               {/* Logout dropdown */}
               {_id ? (
                 <>

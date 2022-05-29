@@ -34,6 +34,20 @@ export const RegistrationSchema = Yup.object().shape({
     .min(1, "Please enter valid Duration Months")
     .max(12, "Please enter Valid Duration Months"),
 });
+export const WaitingSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(3, "Name should have 3 to 50 characters")
+    .max(50, "Name should have 3 to 50 characters")
+    .required("Name is Required"),
+  gender: Yup.string().required("Gender is Required"),
+  mobileNumber: Yup.string().matches(
+    /^\d{10}$/,
+    "Mobile Number should have 10 digits"
+  ),
+  duration: Yup.number()
+    .min(1, "Please enter valid Duration Months")
+    .max(12, "Please enter Valid Duration Months"),
+});
 
 export const LoginSchema = Yup.object().shape({
   email: Yup.string()

@@ -21,7 +21,7 @@ const StudentsList = () => {
   return (
     <Container>
       <Row>
-        <h1 className="p-0 my-5">All Students</h1>
+        <h1 className="p-0 my-5 text-center">All Students</h1>
 
         {error && <Message variant="danger">{error}</Message>}
         {loading && <Loader size="sm" />}

@@ -15,49 +15,64 @@ const ViewSeats = () => {
 
   const seats = useSelector((state) => state.seat.seats) || [];
 
-  const firstRow = [...seats.slice(0, 9), { seatNo: 0 }, ...seats.slice(9, 14)];
+  const firstRow = [...seats.slice(0, 8), { seatNo: 0 }, ...seats.slice(8, 13)];
   const secondRow = [
-    ...seats.slice(14, 23),
+    ...seats.slice(13, 21),
     { seatNo: 0 },
-    ...seats.slice(23, 28),
+    ...seats.slice(21, 26),
   ];
   const thirdRow = [
-    ...seats.slice(28, 37),
+    ...seats.slice(26, 34),
     { seatNo: 0 },
-    ...seats.slice(37, 42),
+    ...seats.slice(34, 39),
   ];
   const fourthRow = [
-    ...seats.slice(42, 51),
+    ...seats.slice(39, 46),
     { seatNo: 0 },
-    ...seats.slice(51, 56),
+    ...seats.slice(46, 50),
   ];
   const fifthRow = [
-    ...seats.slice(56, 65),
+    ...seats.slice(50, 57),
     { seatNo: 0 },
-    ...seats.slice(65, 70),
+    ...seats.slice(57, 61),
   ];
   const sixthRow = [
-    ...seats.slice(70, 79),
+    ...seats.slice(61, 69),
     { seatNo: 0 },
-    ...seats.slice(79, 84),
+    ...seats.slice(69, 74),
   ];
   const seventhRow = [
-    ...seats.slice(84, 93),
+    ...seats.slice(74, 82),
     { seatNo: 0 },
-    ...seats.slice(93, 98),
+    ...seats.slice(82, 87),
   ];
   const eigthRow = [
-    ...seats.slice(98, 107),
+    ...seats.slice(87, 94),
     { seatNo: 0 },
-    ...seats.slice(107, 112),
+    ...seats.slice(94, 98),
   ];
   const ninthRow = [
-    ...seats.slice(112, 121),
+    ...seats.slice(98, 105),
     { seatNo: 0 },
-    ...seats.slice(121, 126),
+    ...seats.slice(105, 109),
+  ];
+  const tenthRow = [
+    ...seats.slice(110, 118),
+    { seatNo: 0 },
+    ...seats.slice(118, 123),
   ];
 
-  const tenthRow = [...seats.slice(126, 142)];
+  const eleventhRow = [
+    ...seats.slice(123, 131),
+    { seatNo: 0 },
+    ...seats.slice(131, 136),
+  ];
+
+  const twelthRow = [
+    ...seats.slice(136, 144),
+    { seatNo: 0 },
+    ...seats.slice(144, 148),
+  ];
 
   return (
     <FormContainer>
@@ -130,7 +145,7 @@ const ViewSeats = () => {
               />
             );
           } else {
-            return <div key={seatNo} className="passage"></div>;
+            return <div key={seatNo} className="passage-beam"></div>;
           }
         })}
       </div>
@@ -148,7 +163,7 @@ const ViewSeats = () => {
               />
             );
           } else {
-            return <div key={seatNo} className="passage"></div>;
+            return <div key={seatNo} className="passage-beam"></div>;
           }
         })}
       </div>
@@ -200,7 +215,7 @@ const ViewSeats = () => {
               />
             );
           } else {
-            return <div key={seatNo} className="passage"></div>;
+            return <div key={seatNo} className="passage-beam"></div>;
           }
         })}
       </div>
@@ -218,7 +233,7 @@ const ViewSeats = () => {
               />
             );
           } else {
-            return <div key={seatNo} className="passage"></div>;
+            return <div key={seatNo} className="passage-beam"></div>;
           }
         })}
       </div>
@@ -236,6 +251,42 @@ const ViewSeats = () => {
             );
           } else {
             return <div key={seatNo} className="passage"></div>;
+          }
+        })}
+      </div>
+
+      {/* 11th Row 14-26 */}
+      <div className="row-15 mb-5 ">
+        {eleventhRow.map(({ seatNo, available, gender }) => {
+          if (seatNo !== 0) {
+            return (
+              <Seat
+                key={seatNo}
+                available={available}
+                gender={gender}
+                number={seatNo}
+              />
+            );
+          } else {
+            return <div key={seatNo} className="passage"></div>;
+          }
+        })}
+      </div>
+
+      {/* 12th Row 14-26 */}
+      <div className="row-15 mb-5 ">
+        {twelthRow.map(({ seatNo, available, gender }) => {
+          if (seatNo !== 0) {
+            return (
+              <Seat
+                key={seatNo}
+                available={available}
+                gender={gender}
+                number={seatNo}
+              />
+            );
+          } else {
+            return <div key={seatNo} className="passage-last"></div>;
           }
         })}
       </div>

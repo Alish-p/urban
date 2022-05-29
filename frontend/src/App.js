@@ -12,6 +12,8 @@ import ViewSeats from "./screens/ViewSeats";
 import Search from "./screens/Search";
 import ExpireScreen from "./screens/Expire";
 import StudentsList from "./screens/StudentsList";
+import WaitingForm from "./screens/WaitingForm";
+import WaitingList from "./screens/WaitingList";
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
               <Route path="/search" element={<Search />}></Route>
               <Route path="/expire" element={<ExpireScreen />}></Route>
               <Route path="/all-students" element={<StudentsList />}></Route>
+              <Route path="/waiting-form" element={<WaitingForm />}></Route>
+              <Route path="/waiting-list" element={<WaitingList />}></Route>
             </Routes>
           </Container>
         </main>
