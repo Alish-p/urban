@@ -1,6 +1,6 @@
-const asyncHandler = require('express-async-handler');
-const UserModel = require('../model/User');
-const { generateToken } = require('../utils/generateToken');
+const asyncHandler = require("express-async-handler");
+const UserModel = require("../model/User");
+const { generateToken } = require("../Utils/generateToken");
 
 const registerUser = asyncHandler(async (req, res) => {
   console.log(req.body);
@@ -30,7 +30,7 @@ const loginUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
     });
   } else {
-    res.status(400).json({ message: 'Invalid Credentials' });
+    res.status(400).json({ message: "Invalid Credentials" });
   }
 });
 
