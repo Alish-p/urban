@@ -25,7 +25,7 @@ export const HalfDayregister = createAsyncThunk(
     try {
       const { user } = x.getState();
 
-      const { data } = await axios.post(`/api/students/half-day`, student, {
+      const { data } = await axios.post(`/api/students/half-day/`, student, {
         headers: { Authorization: `Bearer ${user.userInfo.token}` },
       });
 
@@ -104,7 +104,7 @@ export const student = createSlice({
       state.loading = false;
       state.registered = false;
       state.students = [];
-      halfDayRegistrations: [];
+      state.halfDayRegistrations = [];
     },
   },
   extraReducers: {
