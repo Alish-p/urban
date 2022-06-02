@@ -6,10 +6,14 @@ const {
   fetchAvailableSeats,
   fetchStudentByNumber,
   fetchExpires,
+  newHalfRegistration,
+  fetchHalfDayRegistrations,
 } = require("../controllers/student");
 const { private } = require("../middlewares/Auth");
 
 router.post("/", private, newRegistration);
+router.post("/half-day", newHalfRegistration);
+router.get("/half-day", fetchHalfDayRegistrations);
 router.get("/", fetchStudents);
 router.get("/seats", private, fetchAvailableSeats);
 router.get("/expires", private, fetchExpires);

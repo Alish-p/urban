@@ -2,7 +2,6 @@ const asyncHandler = require("express-async-handler");
 const WaitingModel = require("../model/Waiting");
 
 const book = asyncHandler(async (req, res) => {
-  console.log(req.body);
   const waiting = new WaitingModel({ ...req.body });
   const { _id, name, duration, mobileNumber, gender } = await waiting.save();
 

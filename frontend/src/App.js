@@ -14,6 +14,8 @@ import ExpireScreen from "./screens/Expire";
 import StudentsList from "./screens/StudentsList";
 import WaitingForm from "./screens/WaitingForm";
 import WaitingList from "./screens/WaitingList";
+import HalfDayRegister from "./screens/HalfDayRegistrations";
+import HalfDayList from "./screens/HalfDayList";
 
 function App() {
   return (
@@ -35,6 +37,11 @@ function App() {
               <Route path="/all-students" element={<StudentsList />}></Route>
               <Route path="/waiting-form" element={<WaitingForm />}></Route>
               <Route path="/waiting-list" element={<WaitingList />}></Route>
+              <Route path="half-day/list" element={<HalfDayList />}></Route>
+              <Route
+                path="/half-day/register"
+                element={<HalfDayRegister />}
+              ></Route>
             </Routes>
           </Container>
         </main>

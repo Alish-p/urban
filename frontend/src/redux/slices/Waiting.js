@@ -43,9 +43,6 @@ export const deleteWaitings = createAsyncThunk(
         headers: { Authorization: `Bearer ${user.userInfo.token}` },
       });
 
-      console.log("dada");
-      console.log(data);
-
       return data;
     } catch (error) {
       throw x.rejectWithValue(error.response.data);

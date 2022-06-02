@@ -57,21 +57,21 @@ const ViewSeats = () => {
     ...seats.slice(105, 109),
   ];
   const tenthRow = [
-    ...seats.slice(110, 118),
+    ...seats.slice(109, 117),
     { seatNo: 0 },
-    ...seats.slice(118, 123),
+    ...seats.slice(117, 122),
   ];
 
   const eleventhRow = [
-    ...seats.slice(123, 131),
+    ...seats.slice(122, 130),
     { seatNo: 0 },
-    ...seats.slice(131, 136),
+    ...seats.slice(130, 135),
   ];
 
   const twelthRow = [
-    ...seats.slice(136, 144),
+    ...seats.slice(135, 143),
     { seatNo: 0 },
-    ...seats.slice(144, 148),
+    ...seats.slice(143, 147),
   ];
 
   return (

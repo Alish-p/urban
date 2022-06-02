@@ -19,7 +19,7 @@ const WaitingList = () => {
   return (
     <Container>
       <Row>
-        <h1 className="p-0 my-5 text-center">All Bookings</h1>
+        <h1 className="p-0 my-5 text-center">Waiting List</h1>
 
         {error && <Message variant="danger">{error}</Message>}
         {loading && <Loader size="sm" />}
@@ -49,7 +49,10 @@ const WaitingList = () => {
                       <Button
                         className="btn btn-outline-primary btn-sm p-0 px-3 btn-light"
                         onClick={() => {
-                          dispatch(deleteWaitings(_id));
+                          var result = window.confirm("Want to delete?");
+                          if (result) {
+                            dispatch(deleteWaitings(_id));
+                          }
                         }}
                       >
                         X

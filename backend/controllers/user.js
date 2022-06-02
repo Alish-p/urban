@@ -3,7 +3,6 @@ const UserModel = require("../model/User");
 const { generateToken } = require("../Utils/generateToken");
 
 const registerUser = asyncHandler(async (req, res) => {
-  console.log(req.body);
   const user = new UserModel({ ...req.body });
   const { _id, name, email, isAdmin } = await user.save();
 
@@ -19,7 +18,6 @@ const registerUser = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
   const user = await UserModel.findOne({ email: req.body.email });
   const matched = user ? await user.matchPassword(req.body.password) : false;
-  console.log(matched);
 
   if (user && matched) {
     res.status(200).json({

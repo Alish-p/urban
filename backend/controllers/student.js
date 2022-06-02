@@ -1,10 +1,10 @@
 const asyncHandler = require("express-async-handler");
 const StudentModel = require("../model/Student");
 const RegistrationModel = require("../model/Registration");
+const HalfDayRegistrationModel = require("../model/halfShiftRegistration");
 
+// Full day registrations
 const newRegistration = asyncHandler(async (req, res) => {
-  console.log("student registered");
-
   const {
     name,
     gender,
@@ -51,6 +51,31 @@ const newRegistration = asyncHandler(async (req, res) => {
   res.status(201).json({ registration, student });
 });
 
+// Half day registrations
+const newHalfRegistration = asyncHandler(async (req, res) => {
+  const { name, gender, age, mobileNumber, city, exam, fees, duration, shift } =
+    req.body;
+
+  const student = await new StudentModel({
+    name,
+    gender,
+    age,
+    mobileNumber,
+    city,
+    exam,
+  }).save();
+
+  const registration = await new HalfDayRegistrationModel({
+    fees,
+    duration,
+    shift,
+    student: student._id,
+  }).save();
+
+  res.status(201).json({ registration, student });
+});
+
+// fetch All students
 const fetchStudents = asyncHandler(async (req, res) => {
   const registrations = await RegistrationModel.find(
     {
@@ -59,9 +84,19 @@ const fetchStudents = asyncHandler(async (req, res) => {
     { _id: 0, seatNumber: 1, startDate: 1, endDate: 1 }
   ).populate("student", "name gender mobileNumber");
 
-  console.log(registrations);
-
   registrations.sort((a, b) => a.seatNumber - b.seatNumber);
+
+  res.status(200).json(registrations);
+});
+
+// fetch All Hlaf day registrations
+const fetchHalfDayRegistrations = asyncHandler(async (req, res) => {
+  const registrations = await HalfDayRegistrationModel.find(
+    {
+      endDate: { $gte: new Date() },
+    },
+    { _id: 0, startDate: 1, endDate: 1, shift: 1 }
+  ).populate("student", "name gender mobileNumber");
 
   res.status(200).json(registrations);
 });
@@ -69,12 +104,8 @@ const fetchStudents = asyncHandler(async (req, res) => {
 // Need Work
 const fetchExpires = asyncHandler(async (req, res) => {
   let today = new Date();
-  let numberOfDaysToAdd = 6;
   let end = today.setDate(today.getDate() + 6);
   let start = today.setDate(today.getDate() - 6);
-
-  console.log(start);
-  console.log(end);
 
   const expires = await RegistrationModel.find({
     endDate: { $gte: today, $lt: end },
@@ -87,6 +118,7 @@ const fetchExpires = asyncHandler(async (req, res) => {
   res.status(200).json({ expires, expired });
 });
 
+// fetch student by mobile number
 const fetchStudentByNumber = asyncHandler(async (req, res) => {
   const mobileNumber = req.params.mobile;
   let registration;
@@ -109,6 +141,7 @@ const fetchStudentByNumber = asyncHandler(async (req, res) => {
   res.status(200).json({ registration, student });
 });
 
+// fetch available seats
 const fetchAvailableSeats = asyncHandler(async (req, res) => {
   const registrations = await RegistrationModel.find(
     {
@@ -116,8 +149,6 @@ const fetchAvailableSeats = asyncHandler(async (req, res) => {
     },
     { seatNumber: 1, _id: 0 }
   ).populate("student", "gender");
-
-  console.log(registrations);
 
   const total = [...Array(151).keys()];
 
@@ -131,18 +162,12 @@ const fetchAvailableSeats = asyncHandler(async (req, res) => {
   }));
 
   const filledarr = registrations.map((i) => i["seatNumber"]);
-  console.log(filledarr);
-
-  console.log(filled);
 
   for (let i = 1; i <= 150; i++) {
     if (!filledarr.includes(i)) {
       filled.push({ seatNo: i, available: true });
     }
   }
-
-  console.log("xxx");
-  console.log(filled);
 
   filled.sort((a, b) => a.seatNo - b.seatNo);
 
@@ -155,4 +180,6 @@ module.exports = {
   fetchAvailableSeats,
   fetchStudentByNumber,
   fetchExpires,
+  newHalfRegistration,
+  fetchHalfDayRegistrations,
 };

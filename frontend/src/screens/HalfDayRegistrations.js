@@ -1,18 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { Formik, Field } from "formik";
-import { RegistrationSchema } from "../Utils/ValidationSchema";
+import { HalfDayRegistrationSchema } from "../Utils/ValidationSchema";
 import { useNavigate } from "react-router-dom";
 import TextField from "../Utils/FormComponents/TextField";
 import RadioField from "../Utils/FormComponents/RadioButton";
 import FormContainer from "../components/FormContainer";
 import { useEffect } from "react";
-import { register, unset } from "../redux/slices/Student";
+import { HalfDayregister, unset } from "../redux/slices/Student";
 import { Link } from "react-router-dom";
-import Message from "./Message";
-import Loader from "./Loader";
+import CustomSelect from "../Utils/FormComponents/SelectField";
+import Message from "../components/Message";
+import Loader from "../components/Loader";
 
-const Register = () => {
+const HalfDayRegister = () => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
 
@@ -38,12 +39,13 @@ const Register = () => {
     city: "",
     age: "",
     exam: "",
-    seatNumber: "",
+    shift: "",
     duration: "",
   };
 
   const handleSubmit = (values, { setSubmitting }) => {
-    dispatch(register(values));
+    console.log(values);
+    dispatch(HalfDayregister(values));
     setSubmitting(false);
   };
 
@@ -53,15 +55,21 @@ const Register = () => {
         Go Back
       </Link>
       <FormContainer>
-        <h2 className="my-3 text-center"> Full Day Registration</h2>
+        <h2 className="my-3 text-center"> Half Day Registration</h2>
 
         {loading && <Loader size="sm" />}
         <Formik
           onSubmit={handleSubmit}
-          validationSchema={RegistrationSchema}
+          validationSchema={HalfDayRegistrationSchema}
           initialValues={initialValues}
         >
-          {({ isSubmitting, handleSubmit, handleChange }) => (
+          {({
+            isSubmitting,
+            handleSubmit,
+            handleChange,
+            setFieldValue,
+            values,
+          }) => (
             <Form onSubmit={handleSubmit}>
               <Field
                 type="text"
@@ -105,13 +113,6 @@ const Register = () => {
 
               <Field
                 type="number"
-                name="seatNumber"
-                component={TextField}
-                label="Seat Number"
-              />
-
-              <Field
-                type="number"
                 name="duration"
                 component={TextField}
                 label="Duration (Months)"
@@ -131,6 +132,19 @@ const Register = () => {
                 label="Exam"
               />
 
+              <p>Shift</p>
+
+              <Field
+                handleChange={handleChange}
+                options={[
+                  { value: "morning", label: "Morning" },
+                  { value: "evening", label: "Evening" },
+                ]}
+                label="Please select Shift"
+                component={CustomSelect}
+                name="shift"
+              />
+
               {error && <Message variant="danger">{error}</Message>}
 
               <Button
@@ -148,4 +162,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default HalfDayRegister;

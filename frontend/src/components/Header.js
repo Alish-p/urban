@@ -37,28 +37,76 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              {_id && (
+              {/* {_id && (
                 <LinkContainer to={"/register"}>
                   <Nav.Link>
                     <i className="fa-solid fa-address-card" /> Register
                   </Nav.Link>
                 </LinkContainer>
-              )}
+              )} */}
+
+              {/* Register dropdown */}
               {_id && (
-                <LinkContainer to={"/view-seats"}>
-                  <Nav.Link>
-                    <i className="fa-solid fa-couch" /> View Seats
-                  </Nav.Link>
-                </LinkContainer>
+                <>
+                  <NavDropdown title={"Register"} id="option-dropdown">
+                    <NavDropdown.Item
+                      onClick={() => {
+                        Navigate("/register");
+                      }}
+                    >
+                      Full Day Register
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      onClick={() => {
+                        Navigate("/half-day/register");
+                      }}
+                    >
+                      Half Day Register
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      onClick={() => {
+                        Navigate("/waiting-form");
+                      }}
+                    >
+                      Pre Book
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </>
+              )}
+
+              {/* Viewlist dropdown */}
+              {_id && (
+                <>
+                  <NavDropdown title={"View"} id="option-dropdown">
+                    <NavDropdown.Item
+                      onClick={() => {
+                        Navigate("/all-students");
+                      }}
+                    >
+                      View FullDay List
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      onClick={() => {
+                        Navigate("/half-day/list");
+                      }}
+                    >
+                      View HalfDay List
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      onClick={() => {
+                        Navigate("/waiting-list");
+                      }}
+                    >
+                      View Waiting List
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </>
               )}
 
               {/* functionality dropdown */}
               {_id && (
                 <>
                   <NavDropdown title={"Options"} id="option-dropdown">
-                    <NavDropdown.Item onClick={handleViewStudents}>
-                      View Students
-                    </NavDropdown.Item>
                     <NavDropdown.Item onClick={handleSearch}>
                       Search
                     </NavDropdown.Item>
@@ -69,26 +117,13 @@ const Header = () => {
                 </>
               )}
 
-              {/* functionality dropdown */}
+              {/* View Seat */}
               {_id && (
-                <>
-                  <NavDropdown title={"Pre-book"} id="option-dropdown">
-                    <NavDropdown.Item
-                      onClick={() => {
-                        Navigate("/waiting-form");
-                      }}
-                    >
-                      Create
-                    </NavDropdown.Item>
-                    <NavDropdown.Item
-                      onClick={() => {
-                        Navigate("/waiting-list");
-                      }}
-                    >
-                      View-Bookings
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                </>
+                <LinkContainer to={"/view-seats"}>
+                  <Nav.Link>
+                    <i className="fa-solid fa-couch" /> View Seats
+                  </Nav.Link>
+                </LinkContainer>
               )}
 
               {/* Logout dropdown */}
