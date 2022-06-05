@@ -126,17 +126,23 @@ const fetchStudentByNumber = asyncHandler(async (req, res) => {
     $natural: -1,
   });
 
+  console.log();
+
   if (student) {
     registration = await RegistrationModel.findOne({
-      studentID: student.studentID,
+      student: student._id,
     }).sort({
       $natural: -1,
     });
   } else {
     throw new Error("No Student exist");
   }
+
   if (!student) throw new Error("No Student exist");
   if (!registration) throw new Error("No Registration found");
+
+  console.log(student);
+  console.log(registration);
 
   res.status(200).json({ registration, student });
 });
