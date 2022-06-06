@@ -29,8 +29,9 @@ const StudentsList = () => {
         <Table striped borderless hover variant="light" size="sm" responsive>
           <thead className="thead-dark">
             <tr>
-              <th>#Seat</th>
+              <th>#</th>
               <th>Name</th>
+              <th>#Seat</th>
               <th>Gender</th>
               <th>Number</th>
               <th>Start Date</th>
@@ -38,7 +39,7 @@ const StudentsList = () => {
             </tr>
           </thead>
           <tbody>
-            {students.map((registration) => {
+            {students.map((registration, i) => {
               let { seatNumber, startDate, endDate } = registration || {};
               const { _id, name, mobileNumber, gender } =
                 registration.student || {};
@@ -48,8 +49,9 @@ const StudentsList = () => {
 
               return (
                 <tr key={_id}>
-                  <td>{seatNumber}</td>
+                  <td>{i + 1}</td>
                   <td>{name}</td>
+                  <td>{seatNumber}</td>
                   <td>{gender}</td>
                   <td>{mobileNumber}</td>
                   <td>{startDate}</td>
