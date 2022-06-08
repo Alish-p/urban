@@ -4,6 +4,9 @@ import Seat from "../components/Seat";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSeats } from "../redux/slices/Seats";
 
+import Message from "../components/Message";
+import Loader from "../components/Loader";
+
 const ViewSeats = () => {
   // const error = useSelector((state) => state.seat.error);
   // const loading = useSelector((state) => state.seat.loading);
@@ -14,6 +17,8 @@ const ViewSeats = () => {
   }, []);
 
   const seats = useSelector((state) => state.seat.seats) || [];
+  const error = useSelector((state) => state.seat.error);
+  const loading = useSelector((state) => state.seat.loading);
 
   const firstRow = [...seats.slice(0, 8), { seatNo: 0 }, ...seats.slice(8, 13)];
   const secondRow = [
@@ -77,6 +82,9 @@ const ViewSeats = () => {
   return (
     <FormContainer>
       <h2 className="my-5 text-center">Available Seats</h2>
+
+      {error && <Message variant="danger">{error}</Message>}
+      {loading && <Loader size="sm" />}
 
       {/* First Row 1-13 */}
       <div className="row-15 my-5">
