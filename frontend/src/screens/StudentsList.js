@@ -30,6 +30,7 @@ const StudentsList = () => {
           <thead className="thead-dark">
             <tr>
               <th>#</th>
+              <th>#RID</th>
               <th>Name</th>
               <th>#Seat</th>
               <th>Gender</th>
@@ -40,7 +41,12 @@ const StudentsList = () => {
           </thead>
           <tbody>
             {students.map((registration, i) => {
-              let { seatNumber, startDate, endDate } = registration || {};
+              let {
+                seatNumber,
+                startDate,
+                endDate,
+                _id: RID,
+              } = registration || {};
               const { _id, name, mobileNumber, gender } =
                 registration.student || {};
 
@@ -50,6 +56,7 @@ const StudentsList = () => {
               return (
                 <tr key={_id}>
                   <td>{i + 1}</td>
+                  <td>{RID}</td>
                   <td>{name}</td>
                   <td>{seatNumber}</td>
                   <td>{gender}</td>

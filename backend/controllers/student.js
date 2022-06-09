@@ -81,7 +81,7 @@ const fetchStudents = asyncHandler(async (req, res) => {
     {
       endDate: { $gte: new Date() },
     },
-    { _id: 0, seatNumber: 1, startDate: 1, endDate: 1 }
+    { seatNumber: 1, startDate: 1, endDate: 1 }
   ).populate("student", "name gender mobileNumber");
 
   registrations.sort((a, b) => a.seatNumber - b.seatNumber);
