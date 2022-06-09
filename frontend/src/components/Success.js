@@ -56,7 +56,7 @@ function Success() {
         <div className="my-5 print-source" ref={componentRef}>
           <div className="row">
             <div className="col d-flex justify-content-center">
-              UrbanRead Library
+              <h2>UrbanRead Library </h2>
             </div>
           </div>
           <div className="row my-5">
@@ -158,8 +158,8 @@ function Success() {
           <div className="row justify-content-center">
             <div className="col">
               <p className="small text-muted text-center">
-                +91 75750 49646 | 3RD Floor New Bus Stand, Palanpur |
-                urbanread.gmail.com
+                +91 84016 99646 | 3RD Floor New Bus Stand, Palanpur |
+                urbanread.palanpur@gmail.com
               </p>
             </div>
           </div>
