@@ -107,6 +107,20 @@ const Header = () => {
               {_id && (
                 <>
                   <NavDropdown title={"Options"} id="option-dropdown">
+                    <NavDropdown.Item
+                      onClick={() => {
+                        Navigate("/extend");
+                      }}
+                    >
+                      + Renew
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      onClick={() => {
+                        Navigate("/change-seat");
+                      }}
+                    >
+                      Change Seat
+                    </NavDropdown.Item>
                     <NavDropdown.Item onClick={handleSearch}>
                       Search
                     </NavDropdown.Item>

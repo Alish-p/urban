@@ -19,6 +19,49 @@ export const register = createAsyncThunk(
   }
 );
 // Thunks
+export const extend = createAsyncThunk(
+  "student/extend",
+  async ({ id, days }, x) => {
+    try {
+      const { user } = x.getState();
+
+      const { data } = await axios.post(
+        `/api/students/extend/${id}`,
+        { days },
+        {
+          headers: { Authorization: `Bearer ${user.userInfo.token}` },
+        }
+      );
+
+      return data;
+    } catch (error) {
+      throw x.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+// Thunks
+export const changeSeat = createAsyncThunk(
+  "student/changeSeat",
+  async ({ id, seatNumber }, x) => {
+    try {
+      const { user } = x.getState();
+
+      const { data } = await axios.post(
+        `/api/students/change-seat`,
+        { id, seatNumber },
+        {
+          headers: { Authorization: `Bearer ${user.userInfo.token}` },
+        }
+      );
+
+      return data;
+    } catch (error) {
+      throw x.rejectWithValue(error.response.data);
+    }
+  }
+);
+// Thunks
 export const HalfDayregister = createAsyncThunk(
   "student/halfdayRegister",
   async (student, x) => {
@@ -119,6 +162,40 @@ export const student = createSlice({
       state.registered = true;
     },
     [register.rejected]: (state, { payload }) => {
+      state.error = payload.message;
+      state.loading = false;
+      state.registration = {};
+      state.registered = false;
+    },
+
+    [extend.pending]: (state) => {
+      state.loading = true;
+      state.registration = {};
+    },
+    [extend.fulfilled]: (state, action) => {
+      state.registration = action.payload;
+      state.error = "";
+      state.loading = false;
+      state.registered = true;
+    },
+    [extend.rejected]: (state, { payload }) => {
+      state.error = payload.message;
+      state.loading = false;
+      state.registration = {};
+      state.registered = false;
+    },
+
+    [changeSeat.pending]: (state) => {
+      state.loading = true;
+      state.registration = {};
+    },
+    [changeSeat.fulfilled]: (state, action) => {
+      state.registration = action.payload;
+      state.error = "";
+      state.loading = false;
+      state.registered = true;
+    },
+    [changeSeat.rejected]: (state, { payload }) => {
       state.error = payload.message;
       state.loading = false;
       state.registration = {};

@@ -16,6 +16,8 @@ import WaitingForm from "./screens/WaitingForm";
 import WaitingList from "./screens/WaitingList";
 import HalfDayRegister from "./screens/HalfDayRegistrations";
 import HalfDayList from "./screens/HalfDayList";
+import ExtendScreen from "./screens/Extend";
+import ChangeSeatScreen from "./screens/ChangeSeat";
 
 function App() {
   return (
@@ -42,6 +44,8 @@ function App() {
                 path="/half-day/register"
                 element={<HalfDayRegister />}
               ></Route>
+              <Route path="/extend" element={<ExtendScreen />}></Route>
+              <Route path="/change-seat" element={<ChangeSeatScreen />}></Route>
             </Routes>
           </Container>
         </main>

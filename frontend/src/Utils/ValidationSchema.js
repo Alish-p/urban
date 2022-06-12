@@ -94,6 +94,21 @@ export const LoginSchema = Yup.object().shape({
     .required("Password is Required"),
 });
 
+export const ExtendSchema = Yup.object().shape({
+  id: Yup.string().required("Id is Required"),
+  days: Yup.number()
+    .min(1, "Days should be 1 to 100 ")
+    .max(100, "Days should be 1 to 100 ")
+    .required("Days is Required"),
+});
+
+export const ChangeSeatSchema = Yup.object().shape({
+  id: Yup.string().required("Id is Required"),
+  seatNumber: Yup.number()
+    .min(1, "Please enter valid Seat Number")
+    .max(150, "Please enter Valid Seat Number"),
+});
+
 export const SearchSchema = Yup.object().shape({
   mobileNumber: Yup.string().matches(
     /^\d{10}$/,

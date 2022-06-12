@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const StudentModel = require("../model/Student");
 const RegistrationModel = require("../model/Registration");
 const HalfDayRegistrationModel = require("../model/halfShiftRegistration");
+const { addDays } = require("../Utils/dateUtil");
 
 // Full day registrations
 const newRegistration = asyncHandler(async (req, res) => {
@@ -180,6 +181,52 @@ const fetchAvailableSeats = asyncHandler(async (req, res) => {
   res.status(200).send(filled);
 });
 
+// Extend Member Ship by n days
+const extendMembershipByDay = asyncHandler(async (req, res) => {
+  const { days } = req.body || {};
+  const registration = await RegistrationModel.findById(req.params.id);
+
+  const endDate = addDays(registration.endDate, days || 0);
+  const updated = { ...registration, endDate };
+  const updatedRegistration = await RegistrationModel.findByIdAndUpdate(
+    req.params.id,
+    { endDate },
+    { new: true }
+  );
+
+  console.log(updated);
+
+  res.status(200).json(updatedRegistration);
+});
+
+// Change seat
+const changeSeat = asyncHandler(async (req, res) => {
+  const { seatNumber, id } = req.body;
+
+  let seats = await RegistrationModel.find(
+    {
+      endDate: { $gte: Date.now() },
+    },
+    { seatNumber: 1, _id: 0 }
+  );
+
+  seats = seats.map((i) => i["seatNumber"]);
+
+  if (seats.includes(seatNumber)) {
+    const err = new Error("Seat is not available.");
+    err.status = 400;
+    throw err;
+  }
+
+  const updatedRegistration = await RegistrationModel.findByIdAndUpdate(
+    id,
+    { seatNumber },
+    { new: true }
+  );
+
+  res.status(200).json(updatedRegistration);
+});
+
 module.exports = {
   newRegistration,
   fetchStudents,
@@ -188,4 +235,6 @@ module.exports = {
   fetchExpires,
   newHalfRegistration,
   fetchHalfDayRegistrations,
+  extendMembershipByDay,
+  changeSeat,
 };
