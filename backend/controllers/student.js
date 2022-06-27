@@ -105,8 +105,8 @@ const fetchHalfDayRegistrations = asyncHandler(async (req, res) => {
 // Need Work
 const fetchExpires = asyncHandler(async (req, res) => {
   let today = new Date();
-  let end = today.setDate(today.getDate() + 6);
-  let start = today.setDate(today.getDate() - 6);
+  let end = new Date().setDate(today.getDate() + 6);
+  let start = new Date().setDate(today.getDate() - 6);
 
   const expires = await RegistrationModel.find({
     endDate: { $gte: today, $lt: end },
@@ -114,7 +114,7 @@ const fetchExpires = asyncHandler(async (req, res) => {
 
   const expired = await RegistrationModel.find({
     endDate: { $gte: start, $lt: today },
-  });
+  }).populate("student");
 
   res.status(200).json({ expires, expired });
 });
