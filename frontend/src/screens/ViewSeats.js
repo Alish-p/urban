@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import FormContainer from "../components/FormContainer";
 import Seat from "../components/Seat";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSeats } from "../redux/slices/Seats";
+import { ButtonGroup, Button } from "react-bootstrap";
 
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -11,6 +12,12 @@ const ViewSeats = () => {
   // const error = useSelector((state) => state.seat.error);
   // const loading = useSelector((state) => state.seat.loading);
   const dispatch = useDispatch();
+
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = () => {
+    setChecked(!checked);
+  };
 
   useEffect(() => {
     dispatch(fetchSeats());
@@ -86,6 +93,20 @@ const ViewSeats = () => {
       {error && <Message variant="danger">{error}</Message>}
       {loading && <Loader size="sm" />}
 
+      <div class="form-check form-switch">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          id="SwitchBtn"
+          checked={checked}
+          onChange={handleChange}
+        />
+        <label class="form-check-label" for="SwitchBtn">
+          Show Female Seats
+        </label>
+      </div>
+
       {/* First Row 1-13 */}
       <div className="row-15 my-5">
         {firstRow.map(({ seatNo, available, gender }) => {
@@ -95,6 +116,7 @@ const ViewSeats = () => {
                 key={seatNo}
                 available={available}
                 gender={gender}
+                showFemaleSeats={checked}
                 number={seatNo}
               />
             );
@@ -113,6 +135,7 @@ const ViewSeats = () => {
                 key={seatNo}
                 available={available}
                 gender={gender}
+                showFemaleSeats={checked}
                 number={seatNo}
               />
             );
@@ -131,6 +154,7 @@ const ViewSeats = () => {
                 key={seatNo}
                 available={available}
                 gender={gender}
+                showFemaleSeats={checked}
                 number={seatNo}
               />
             );
@@ -149,6 +173,7 @@ const ViewSeats = () => {
                 key={seatNo}
                 available={available}
                 gender={gender}
+                showFemaleSeats={checked}
                 number={seatNo}
               />
             );
@@ -167,6 +192,7 @@ const ViewSeats = () => {
                 key={seatNo}
                 available={available}
                 gender={gender}
+                showFemaleSeats={checked}
                 number={seatNo}
               />
             );
@@ -184,6 +210,7 @@ const ViewSeats = () => {
                 key={seatNo}
                 available={available}
                 gender={gender}
+                showFemaleSeats={checked}
                 number={seatNo}
               />
             );
@@ -202,6 +229,7 @@ const ViewSeats = () => {
                 key={seatNo}
                 available={available}
                 gender={gender}
+                showFemaleSeats={checked}
                 number={seatNo}
               />
             );
@@ -219,6 +247,7 @@ const ViewSeats = () => {
                 key={seatNo}
                 available={available}
                 gender={gender}
+                showFemaleSeats={checked}
                 number={seatNo}
               />
             );
@@ -237,6 +266,7 @@ const ViewSeats = () => {
                 key={seatNo}
                 available={available}
                 gender={gender}
+                showFemaleSeats={checked}
                 number={seatNo}
               />
             );
@@ -255,6 +285,7 @@ const ViewSeats = () => {
                 available={available}
                 gender={gender}
                 number={seatNo}
+                showFemaleSeats={checked}
               />
             );
           } else {
@@ -272,6 +303,7 @@ const ViewSeats = () => {
                 key={seatNo}
                 available={available}
                 gender={gender}
+                showFemaleSeats={checked}
                 number={seatNo}
               />
             );
@@ -291,6 +323,7 @@ const ViewSeats = () => {
                 available={available}
                 gender={gender}
                 number={seatNo}
+                showFemaleSeats={checked}
               />
             );
           } else {
