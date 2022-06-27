@@ -4,6 +4,7 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { useReactToPrint } from "react-to-print";
+import { welcomeMessage } from "../Utils/CreateText";
 
 function Success() {
   const { registration, student } = useSelector(
@@ -42,7 +43,9 @@ function Success() {
 
               <a
                 className="btn bg-white btn-light mx-1px text-95"
-                href={`http://wa.me/91${mobileNumber}`}
+                href={`http://wa.me/91${mobileNumber}?text=${welcomeMessage(
+                  name
+                )}`}
                 data-title="PDF"
                 target={"_blank"}
               >
