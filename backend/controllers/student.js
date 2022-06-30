@@ -102,7 +102,7 @@ const fetchHalfDayRegistrations = asyncHandler(async (req, res) => {
   res.status(200).json(registrations);
 });
 
-// Need Work
+// fetch expired and about to expire registration details
 const fetchExpires = asyncHandler(async (req, res) => {
   let today = new Date();
   let end = new Date().setDate(today.getDate() + 6);

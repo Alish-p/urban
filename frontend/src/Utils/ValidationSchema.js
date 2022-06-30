@@ -97,8 +97,8 @@ export const LoginSchema = Yup.object().shape({
 export const ExtendSchema = Yup.object().shape({
   id: Yup.string().required("Id is Required"),
   days: Yup.number()
-    .min(1, "Days should be 1 to 100 ")
-    .max(100, "Days should be 1 to 100 ")
+    .min(-20, "Days should be -20 to 100 ")
+    .max(100, "Days should be -20 to 100 ")
     .required("Days is Required"),
 });
 
