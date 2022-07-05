@@ -96,7 +96,7 @@ const fetchHalfDayRegistrations = asyncHandler(async (req, res) => {
     {
       endDate: { $gte: new Date() },
     },
-    { _id: 0, startDate: 1, endDate: 1, shift: 1 }
+    { _id: 1, startDate: 1, endDate: 1, shift: 1 }
   ).populate("student", "name gender mobileNumber");
 
   res.status(200).json(registrations);

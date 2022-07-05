@@ -15,13 +15,17 @@ UrbanRead Library`);
 export const renewMessage = (name, expireDate) => {
   return encodeURI(`
 Hi ${name},
-Thank you for being a part of our UrbanRead community.
-We hope you’ve been able to enjoy all the benefits of your membership.
+
+Thank you for being a part of our UrbanRead community. We hope you’ve been able to enjoy all the benefits of your membership.
   
-Your membership is expiring on ${expireDate}.
+Your membership is expiring on *${expireDate}*.
+
 Please renew your membership to continue using the benefits.
 We’re excited to have you back!
+
+And, We would really love your feedback. Post a review to our profile.
+https://g.page/r/CWcsNBy2kvrSEB0/review
   
-Best,
+Regards,
 UrbanRead Library`);
 };

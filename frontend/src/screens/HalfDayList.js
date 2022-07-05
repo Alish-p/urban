@@ -29,6 +29,7 @@ const HalfDayList = () => {
           <thead className="thead-dark">
             <tr>
               <th>#</th>
+              <th>ID#</th>
               <th>Name</th>
               <th>Shift</th>
               <th>Mobile</th>
@@ -42,6 +43,7 @@ const HalfDayList = () => {
               return (
                 <tr key={_id}>
                   <td>{i + 1}</td>
+                  <td>{_id}</td>
                   <td>{student.name}</td>
                   <td style={{ textTransform: "capitalize" }}>{shift}</td>
                   <td>{student.mobileNumber}</td>
