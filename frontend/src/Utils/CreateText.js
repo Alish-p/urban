@@ -5,8 +5,16 @@ Thank You for being an Urban Read member !
 We sincerely value your decision to continue to be a part of our family. Please do not hesitate if you need any help.
 
 Please Note:
+
+1)
 Wifi Username : urbanread
 Wifi Password : urbanread@palanpur
+
+2)
+Wifi Username : urbanread2
+Wifi Password : urbanread2@palanpur
+
+Please save this number (84016 99646) in order to recieve all the updates.
 
 All the Best ,
 UrbanRead Library`);
