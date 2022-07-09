@@ -23,6 +23,7 @@ const ExtendScreen = () => {
   const initialvalues = {
     id: "",
     days: "",
+    fees: "",
   };
 
   useEffect(() => {
@@ -70,9 +71,16 @@ const ExtendScreen = () => {
                 label="Days"
                 placeholder="Days to Extend"
               />
+              <Field
+                type="number"
+                name="fees"
+                component={TextField}
+                label="Fees"
+                placeholder="Renew Fees"
+              />
 
               <Button type="submit" disabled={isSubmitting}>
-                Extend
+                Renew
               </Button>
             </Form>
           )}

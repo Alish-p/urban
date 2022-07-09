@@ -119,6 +119,22 @@ const fetchExpires = asyncHandler(async (req, res) => {
   res.status(200).json({ expires, expired });
 });
 
+// fetch expired and about to expire registration details
+const fetchTodaysData = asyncHandler(async (req, res) => {
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  const registrations = await RegistrationModel.find({
+    startDate: { $gte: today },
+  }).populate("student");
+
+  const renews = await RegistrationModel.find({
+    renewDate: { $gte: today },
+  }).populate("student");
+
+  res.status(200).json({ registrations, renews });
+});
+
 // fetch student by mobile number
 const fetchStudentByNumber = asyncHandler(async (req, res) => {
   const mobileNumber = req.params.mobile;
@@ -183,18 +199,20 @@ const fetchAvailableSeats = asyncHandler(async (req, res) => {
 
 // Extend Member Ship by n days
 const extendMembershipByDay = asyncHandler(async (req, res) => {
-  const { days } = req.body || {};
+  const { days, fees = 0 } = req.body || {};
   const registration = await RegistrationModel.findById(req.params.id);
 
   const endDate = addDays(registration.endDate, days || 0);
-  const updated = { ...registration, endDate };
+
+  const updated =
+    days <= 0 || fees == 0
+      ? { endDate }
+      : { endDate, renewFees: fees, renewDate: new Date() };
   const updatedRegistration = await RegistrationModel.findByIdAndUpdate(
     req.params.id,
-    { endDate },
+    updated,
     { new: true }
   );
-
-  console.log(updated);
 
   res.status(200).json(updatedRegistration);
 });
@@ -237,4 +255,5 @@ module.exports = {
   fetchHalfDayRegistrations,
   extendMembershipByDay,
   changeSeat,
+  fetchTodaysData,
 };

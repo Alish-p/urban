@@ -21,13 +21,13 @@ export const register = createAsyncThunk(
 // Thunks
 export const extend = createAsyncThunk(
   "student/extend",
-  async ({ id, days }, x) => {
+  async ({ id, days, fees }, x) => {
     try {
       const { user } = x.getState();
 
       const { data } = await axios.post(
         `/api/students/extend/${id}`,
-        { days },
+        { days, fees },
         {
           headers: { Authorization: `Bearer ${user.userInfo.token}` },
         }

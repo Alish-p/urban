@@ -99,6 +99,10 @@ const Header = () => {
                     >
                       View Waiting List
                     </NavDropdown.Item>
+
+                    <NavDropdown.Item onClick={handleExpire}>
+                      View Expire List
+                    </NavDropdown.Item>
                   </NavDropdown>
                 </>
               )}
@@ -124,8 +128,12 @@ const Header = () => {
                     <NavDropdown.Item onClick={handleSearch}>
                       Search
                     </NavDropdown.Item>
-                    <NavDropdown.Item onClick={handleExpire}>
-                      Expire
+                    <NavDropdown.Item
+                      onClick={() => {
+                        Navigate("/todays-data");
+                      }}
+                    >
+                      View Todays data
                     </NavDropdown.Item>
                   </NavDropdown>
                 </>

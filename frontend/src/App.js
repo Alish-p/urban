@@ -18,6 +18,7 @@ import HalfDayRegister from "./screens/HalfDayRegistrations";
 import HalfDayList from "./screens/HalfDayList";
 import ExtendScreen from "./screens/Extend";
 import ChangeSeatScreen from "./screens/ChangeSeat";
+import TodayDataScreen from "./screens/TodayData";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
               <Route path="/edit" element={<Edit />}></Route>
               <Route path="/search" element={<Search />}></Route>
               <Route path="/expire" element={<ExpireScreen />}></Route>
+              <Route path="/todays-data" element={<TodayDataScreen />}></Route>
               <Route path="/all-students" element={<StudentsList />}></Route>
               <Route path="/waiting-form" element={<WaitingForm />}></Route>
               <Route path="/waiting-list" element={<WaitingList />}></Route>

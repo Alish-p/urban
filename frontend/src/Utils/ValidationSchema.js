@@ -100,6 +100,7 @@ export const ExtendSchema = Yup.object().shape({
     .min(-20, "Days should be -20 to 100 ")
     .max(100, "Days should be -20 to 100 ")
     .required("Days is Required"),
+  fees: Yup.number().max(10000, "Fees should be less than 10000 "),
 });
 
 export const ChangeSeatSchema = Yup.object().shape({

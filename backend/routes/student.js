@@ -10,6 +10,7 @@ const {
   fetchHalfDayRegistrations,
   extendMembershipByDay,
   changeSeat,
+  fetchTodaysData,
 } = require("../controllers/student");
 const { private } = require("../middlewares/Auth");
 
@@ -20,6 +21,7 @@ router.post("/change-seat", changeSeat);
 router.get("/half-day", fetchHalfDayRegistrations);
 router.get("/", fetchStudents);
 router.get("/seats", private, fetchAvailableSeats);
+router.get("/todays", fetchTodaysData);
 router.get("/expires", private, fetchExpires);
 router.get("/:mobile", private, fetchStudentByNumber);
 

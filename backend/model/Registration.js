@@ -9,6 +9,8 @@ const registrationSchema = new Schema({
   seatNumber: Number,
   startDate: { type: Date, default: Date.now },
   endDate: Date,
+  renewDate: { type: Date, default: null },
+  renewFees: Number,
   fees: Number,
   duration: Number,
 });
